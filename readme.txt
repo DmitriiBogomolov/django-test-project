@@ -22,4 +22,4 @@ YourEmailHere@YourEmailHere.com
 ----------------------------------------------
 
 Инструментарий:
-django, python, unitest, jquery, flake8( без конфигурации ), SQLite
+django, python, unitest, jquery, flake8(без конфигурации), SQLite
