@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block scripts %}<script src="{% static "js/register.js" %}"></script>{% endblock scripts %}
+
+{% block title %}Register{% endblock title %}
+
+{% block header %}Register{% endblock header %}
+
+{% block content %}
+
+<form class="form" autocomplete="off" onsubmit="register(); return false;"">
+    {% csrf_token %}
+    {{form.username}}
+    {{form.email}}
+    {{form.password}}
+    {{form.confirm}}
+    <ul class="error-list"></ul>
+    <button class="form-button" id="submit">Create an account</button>
+</form>
+<span class="form-suffix form-suffix_back">&#8592; <a href="{% url 'loginPage' %}">Login</a></span>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block scripts %}<script src="{% static "js/messager.js" %}"></script>{% endblock scripts %}
+
+{% block title %}Messager{% endblock title %}
+
+{% block header %}Messager{% endblock header %}
+
+{% block content %}
+
+<p>Hi {{username}}! Enter your email address and message to contact the administrator.</p>
+
+<form class="form" autocomplete="off" onsubmit="sendMessage(); return false;">
+    {% csrf_token %}
+    {{form.email}}
+    {{form.message}}
+    <ul class="error-list"></ul>
+    <button class="form-button">Send message</button>
+</form>
+<span class="form-suffix form-suffix_back"><a href="{% url 'logout' %}">&#8592; Logout</a></td></span>
+
+{% endblock content %}
