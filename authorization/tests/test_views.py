@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib import auth
 from django.contrib.auth.models import User
 
 
@@ -19,17 +18,18 @@ class AuthorizationPostTests(TestCase):
 
     def setUp(self):
         User.objects.create_user('testuser', 'testuser@gmail.com',
-                                 'qwerty12345')
+                                 'testpassword123')
         self.user = User.objects.get(username='testuser')
 
     def test_login(self):
         resp = self.client.post(
             reverse('login'),
-            {'username': 'testuser', 'password': 'qwerty12345'}
+            {'username': 'testuser', 'password': 'testpassword123'}
             )
 
         self.assertEqual(resp.status_code, 200)
-        resp = self.client.get(reverse('login'))
+        self.client.login(username='testuser', password='testpassword123')
+        resp = self.client.get(reverse('message'))
         self.assertEqual(resp.context["user"], self.user)
 
     def test_register(self):

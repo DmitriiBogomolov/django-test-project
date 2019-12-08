@@ -9,25 +9,31 @@ import json
 
 class Login(View):
     def get(self, request):
-        loginForm = LoginForm()
-        return render(request, "login.html", {"form": loginForm})
+        if not request.user.is_authenticated:
+            loginForm = LoginForm()
+            return render(request, "login.html", {"form": loginForm})
+        else:
+            return redirect('message')
 
     def post(self, request):
-        username = request.POST["username"]
-        password = request.POST["password"]
-        data = {'username': username, 'password': password}
-        loginForm = LoginForm(data)
+        if not request.user.is_authenticated:
+            username = request.POST["username"]
+            password = request.POST["password"]
+            data = {'username': username, 'password': password}
+            loginForm = LoginForm(data)
 
-        if loginForm.is_valid():
-            user = auth.authenticate(username=username, password=password)
-            if user is not None:
-                auth.login(request, user)
-                return HttpResponse("ok", content_type='text/html')
+            if loginForm.is_valid():
+                user = auth.authenticate(username=username, password=password)
+                if user is not None:
+                    auth.login(request, user)
+                    return HttpResponse("ok", content_type='text/html')
+                else:
+                    return HttpResponse("login_error", content_type='text/html')
             else:
-                return HttpResponse("login_error", content_type='text/html')
+                return HttpResponse(json.dumps(loginForm.errors),
+                                    content_type='application/json')
         else:
-            return HttpResponse(json.dumps(loginForm.errors),
-                                content_type='application/json')
+            return HttpResponseForbidden()
 
 
 class Register(View):

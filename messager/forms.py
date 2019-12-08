@@ -11,7 +11,7 @@ class PlaceholderForm(forms.Form):
 
 
 class MessageForm(PlaceholderForm):
-    email = forms.EmailField(help_text='Email', min_length=5, max_length=25)
+    email = forms.EmailField(help_text='Email', min_length=5, max_length=35)
     message = forms.CharField(widget=forms.Textarea, min_length=10,
                               max_length=255, help_text='Your message')
 

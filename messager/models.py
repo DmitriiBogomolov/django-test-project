@@ -7,7 +7,7 @@ class Message(models.Model):
     class Meta():
         db_table = "message"
 
-    email = models.EmailField(max_length=25)
+    email = models.EmailField(max_length=35)
     message = models.TextField(max_length=255)
     date = models.DateTimeField()
     sent = models.BooleanField(default=False)

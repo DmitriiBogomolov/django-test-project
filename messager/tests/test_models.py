@@ -39,7 +39,7 @@ class MessageModelTest(TestCase):
     def test_email_max_length(self):
         message = Message.objects.get(id=1)
         max_length = message._meta.get_field('email').max_length
-        self.assertEquals(max_length, 25)
+        self.assertEquals(max_length, 35)
 
     def test_message_max_length(self):
         message = Message.objects.get(id=1)
