@@ -13,10 +13,10 @@
     {% csrf_token %}
     {{form.username}}
     {{form.email}}
-    {{form.password}}
-    {{form.confirm}}
+    {{form.password1}}
+    {{form.password2}}
     <ul class="error-list"></ul>
     <button class="form-button" id="submit">Create an account</button>
 </form>
-<span class="form-suffix form-suffix_back">&#8592; <a href="{% url 'loginPage' %}">Login</a></span>
+<span class="form-suffix form-suffix_back">&#8592; <a href="{% url 'login' %}">Login</a></span>
 {% endblock content %}

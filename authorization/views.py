@@ -6,14 +6,12 @@ from django.http import HttpResponseForbidden
 from .forms import LoginForm, RegisterForm
 import json
 
-# Create your views here.
-class LoginPage(View):
+
+class Login(View):
     def get(self, request):
         loginForm = LoginForm()
         return render(request, "login.html", {"form": loginForm})
 
-
-class Login(View):
     def post(self, request):
         username = request.POST["username"]
         password = request.POST["password"]
@@ -47,7 +45,7 @@ class Register(View):
             if registerForm.is_valid():
                 user = registerForm.save()
                 user = auth.authenticate(username=request.POST["username"],
-                                         password=request.POST["password"])
+                                         password=request.POST["password1"])
                 if user is not None:
                     auth.login(request, user)
                 return HttpResponse("ok", content_type='text/html')
@@ -62,4 +60,4 @@ class Register(View):
 class Logout(View):
     def get(self, request):
         auth.logout(request)
-        return redirect('loginPage')
+        return redirect('login')

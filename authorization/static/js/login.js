@@ -8,7 +8,7 @@ function autorize(){
   let formData = $('.form').serialize();
     $.ajax({
       type: "POST",
-      url: "authorize/",
+      url: "/login/",
       data: formData,
       dataType: "text",
       cache: false,
@@ -38,5 +38,5 @@ function updateErrorList(errors){
       errorList.innerHTML += "<li>"+error+"</li>";
     });
   }
-  
+
 }

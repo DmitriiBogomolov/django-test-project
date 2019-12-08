@@ -16,12 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from messager.views import Messager
-from authorization.views import LoginPage, Register, Logout, Login
+from authorization.views import Register, Logout, Login
 
 urlpatterns = [
-    url(r'^login/authorize/$', Login.as_view(), name='login'),
-    url(r'^login/$', LoginPage.as_view(), name='loginPage'),
-    url(r'^register/$', Register.as_view(), name='registerPage'),
+    url(r'^login/$', Login.as_view(), name='login'),
+    url(r'^register/$', Register.as_view(), name='register'),
     url(r'^logout/$', Logout.as_view(), name='logout'),
     url(r'^sendMessage/$', Messager.as_view(), name='sendMessage'),
     url(r'^admin/', admin.site.urls),
